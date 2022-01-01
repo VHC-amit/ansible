@@ -8,7 +8,7 @@
 
 # Way to initiate an instance through template (template already crated in aws)
 
-TEMP_ID="lt-09abfdf2d74f1035b"
+TEMP_ID="lt-074a0c36ef35a9356"
 TEMP_VER=1
 #aws ec2 run-instances --launch-template LaunchTemplateId=${TEMP_ID},Version=${TEMP_VER}
 aws ec2 run-instances --launch-template LaunchTemplateId=${TEMP_ID},Version=${TEMP_VER}
