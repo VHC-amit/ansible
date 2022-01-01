@@ -11,6 +11,6 @@
 TEMP_ID="lt-074a0c36ef35a9356"
 TEMP_VER=1
 #aws ec2 run-instances --launch-template LaunchTemplateId=${TEMP_ID},Version=${TEMP_VER}
-aws ec2 run-instances --launch-template LaunchTemplateId=${TEMP_ID},Version=${TEMP_VER}  --tag-specifications "ResourceType=spot-instances-request,Tags=[Key=Name,Value=frontend]" "ResourceType=instance,Tags=[Key=Name,Value=frontend]" | jq
+aws ec2 run-instances --launch-template LaunchTemplateId=${TEMP_ID},Version=${TEMP_VER}  --tag-specifications "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=frontend}]" "ResourceType=instance,Tags=[{Key=Name,Value=frontend}]" | jq
 
 # Good partice is to copy paste commands always to avoid typo
