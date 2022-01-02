@@ -7,7 +7,7 @@
 #aws ec2 request-spot-instances --instance-count 1 --type "persistent" --launch-specification file://spot.json --tag-specifications "ResourceType=spot-instances-request,Tags=[{Key=name,Value=frontend}]"
 
 # validate whether the instance is already up and running 
-aws ec2 describe-instances --filters "Name=tag:Name,Values=frontend" | jq .Reservations[].Instances[].State.Name | sed 's/"//g" | grep  -E 'running|stopped' &>/dev/null
+aws ec2 describe-instances --filters "Name=tag:Name,Values=frontend" | jq .Reservations[].Instances[].State.Name | sed 's/"//g' | grep  -E 'running|stopped' &>/dev/null
 If [$? -eq -0]; then
   echo "Instance is already there"
   exit
