@@ -16,7 +16,6 @@ fi
 COMPONENT=$1
 
 
-
 # validate whether the instance is already up and running 
 aws ec2 describe-instances --filters "Name=tag:Name,Values=${COMPONENT}" | jq .Reservations[].Instances[].State.Name | sed 's/"//g' | grep  -E 'running|stopped' &>/dev/null
 if [ $? -eq -0 ]; then
@@ -32,4 +31,7 @@ TEMP_ID="lt-09e1f5b2e87271143"
 TEMP_VER=1
 aws ec2 run-instances --launch-template LaunchTemplateId=${TEMP_ID},Version=${TEMP_VER}  --tag-specifications "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=${COMPONENT}}]" "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]" | jq
 
+#take out IP Address
+IPADDRESS=(aws ec2 describe-instances --filters "Name=tag:Name,Values=${COMPONENT}" | jq .Reservations[].Instances[].PrivateIpAddress | sed 's/"//g')
 
+sed -e "s/IPADDRESS/${IPADDRESS}/" -e "s/COMPONENT/${COMPONENT}/" record.json >/tmp/record.json
