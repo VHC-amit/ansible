@@ -6,12 +6,13 @@
 # Way to initiate an instance
 #aws ec2 request-spot-instances --instance-count 1 --type "persistent" --launch-specification file://spot.json --tag-specifications "ResourceType=spot-instances-request,Tags=[{Key=name,Value=frontend}]"
 
-#validate whether input is provided 
+#validate whether input is provided [-z will verify whether it is empty - $1 is the ist argument]
 if [ -z "$1" ]; then
   echo "input is missing"
   exit 1
 fi
 
+# $1 is the 1st argument
 COMPONENT=$1
 
 
