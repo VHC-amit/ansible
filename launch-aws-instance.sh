@@ -8,7 +8,7 @@
 
 # validate whether the instance is already up and running 
 aws ec2 describe-instances --filters "Name=tag:Name,Values=frontend" | jq .Reservations[].Instances[].State.Name | sed 's/"//g' | grep  -E 'running|stopped' &>/dev/null
-If [$? -eq -0]; then
+If [ $? -eq -0 ]; then
   echo "Instance is already there"
   exit
 else
